@@ -1,0 +1,39 @@
+@model List<GoogleKeepClone.ViewModels.NotesVm>
+
+@{
+    ViewData["Title"] = "List of Notes";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title">List Of Notes</h4>
+            <a asp-action="Create" class="btn btn-primary"><i class="bi bi-cloud-plus-fill"></i> New Note</a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-12">
+                        <div class="card" style="background-color: @item.Color;">
+                            <div class="card-header">
+                                <h5 class="card-title text-white">@item.Title</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-white">@item.Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success"><i class="bi bi-pencil-square"></i></a>
+
+                                <form asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                                    <button type="submit" onclick="return confirm('Do you really want to delete?')" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
